@@ -1,9 +1,9 @@
 import Image from "next/image";
 import { useDispatch } from "react-redux";
-
+import { openCommentModal, openLogInModal } from "@/redux/modalSlice";
 function Landing1() {
-  // const dispatch = useDispatch()
-  // onClick={() => dispatch(openSignUpModal())}
+  const dispatch = useDispatch();
+
   return (
     <div class="container">
       <div class="row">
@@ -20,10 +20,23 @@ function Landing1() {
               <br class="remove--tablet" />
               and even people who don’t like to read.
             </div>
-            <button class="btn home__cta--btn" >Login</button>
+            <button
+              class="btn home__cta--btn"
+              onClick={(e) => {
+                e.stopPropagation();
+                dispatch(openLogInModal());
+              }}
+            >
+              Login
+            </button>
           </div>
           <figure class="landing__image--mask">
-            <Image src="/assets/landing.png" width={500} height={500} alt="landing" />
+            <Image
+              src="/assets/landing.png"
+              width={500}
+              height={500}
+              alt="landing"
+            />
           </figure>
         </div>
       </div>
