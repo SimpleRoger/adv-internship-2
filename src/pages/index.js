@@ -8,12 +8,14 @@ import Reviews from "@/components/Reviews";
 import Numbers from "@/components/Numbers";
 import Footer from "@/components/Footer";
 import AuthModal from "@/components/AuthModal";
+import SignUpModal from "@/components/SignUpModal";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   return (
     <>
+      <SignUpModal />
       <AuthModal />
       <Navbar1 />
       <Landing1 />
