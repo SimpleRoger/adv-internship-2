@@ -11,10 +11,10 @@ import {
 
 function Sidebar() {
   return (
-    <div className=" h-full hidden sm:flex pt-2 pl-2 pr-2 flex-col fixed xl:ml-24 bg-[#f7faf9]">
+    <div className=" h-full hidden sm:flex pt-2 pl-2 pr-2 flex-col fixed bg-[#f7faf9]">
       <nav className="h-full relative flex flex-col space-between gap-y-[60%] justify-start text-left">
         <div>
-          <div className="flex justify-center items-center xl:justify-start py-3 xl:p-3">
+          <div className="flex justify-start py-3 xl:p-3">
             <Image src={"/assets/logo.webp"} width={200} height={34} />
           </div>
           <SidebarLink Icon={AiFillHome} text={"For You"} />
@@ -34,7 +34,7 @@ function Sidebar() {
 function SidebarLink({ text, Icon }) {
   return (
     <li
-      className="hoverAnimation flex justify-center mb-3 items-center text-xl space-x-3 hover:cursor-not-allowed text-left
+      className="hoverAnimation flex ml-3 mb-3 items-center text-xl space-x-3 hover:cursor-not-allowed text-left
     "
     >
       <Icon className="h-7" />
