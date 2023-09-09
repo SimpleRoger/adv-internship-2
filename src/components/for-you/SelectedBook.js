@@ -24,29 +24,37 @@ export default function SelectedBook() {
           ) : (
             <div></div>
           )}
-          <div className="ml-[300px]">
-            <div className="mb-2 w-[172px] h-[172px]">
-              <img src={book.imageLink} alt="bookImg" />
-            </div>
-            <div className="text-base font-bold text-black mb-2 ">
-              {book.title}
-            </div>
-            <div className="text-sm text-gray-400 font-light mb-2  ">
-              {book.author}
-            </div>
-            <div className="text-sm text-black mb-2 ">{book.subTitle}</div>
-            <div className="flex gap-2">
-              <div className="flex items-center gap-1 text-sm font-light text-gray-400 ">
-                <div className="flex w-4 h-4 ">
-                  {/* <AccessTimeRoundedIcon className="w-full h-full " /> */}
-                </div>
-                <div>03:24</div>
+          <div className="mb-[50px]">
+            <h1 className="font-bold text-xl mb-2 mt-2" >Selected just for you</h1>
+            <div className="flex bg-slate-200 w-[50%]">
+              <div className="text-sm text-black mb-2  w-[200px]">{book.subTitle}</div>
+              <div className="w-[1px] h-[150px] bg-black mx-5">
+
               </div>
-              <div className="flex items-center gap-1 text-sm font-light text-gray-400">
-                <div className="flex w-4 h-4 ">
-                  {/* <StarOutlineOutlinedIcon className="w-full h-full" /> */}
+              <div className="mb-2 w-[172px] h-[172px]">
+                <img src={book.imageLink} alt="bookImg" />
+              </div>
+              <div>
+                <div className="text-base font-bold text-black mb-2 ">
+                  {book.title}
                 </div>
-                <div>{book.averageRating}</div>
+                <div className="text-sm text-gray-400 font-light mb-2  ">
+                  {book.author}
+                </div>
+                <div className="flex gap-2">
+                  <div className="flex items-center gap-1 text-sm font-light text-gray-400 ">
+                    <div className="flex w-4 h-4 ">
+                      {/* <AccessTimeRoundedIcon className="w-full h-full " /> */}
+                    </div>
+                    <div>03:24</div>
+                  </div>
+                  <div className="flex items-center gap-1 text-sm font-light text-gray-400">
+                    <div className="flex w-4 h-4 ">
+                      {/* <StarOutlineOutlinedIcon className="w-full h-full" /> */}
+                    </div>
+                    <div>{book.averageRating}</div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

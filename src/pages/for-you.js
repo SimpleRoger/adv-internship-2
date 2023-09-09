@@ -4,16 +4,21 @@ import Sidebar from "../components/for-you/Sidebar";
 import SelectedBook from "../components/for-you/SelectedBook";
 import Main from "../components/for-you/Main";
 import SearchBar from "../components/for-you/SearchBar";
+import Recommended from "../components/for-you/Recommended";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function ForYou() {
   return (
-    <>
-      <SearchBar />
+    <div className="flex">
       <Sidebar />
-      <SelectedBook />
-      <Main />
-    </>
+      <div>
+        <SearchBar />
+        <div className="flex flex-col items-center width-[100%] max-w-4xl mx-auto">
+          <SelectedBook />
+          <Recommended />
+        </div>
+      </div>
+    </div>
   );
 }

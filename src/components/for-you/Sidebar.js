@@ -11,7 +11,7 @@ import {
 
 function Sidebar() {
   return (
-    <div className="absolute top-0 h-full hidden sm:flex pt-2 pl-2 pr-2 flex-col bg-[#f7faf9]">
+    <div className="h-screen top-0 hidden sm:flex pt-2 pl-2 pr-2 flex-col bg-[#f7faf9]">
       <nav className="h-full relative flex flex-col space-between gap-y-[60%] justify-start text-left">
         <div>
           <div className="flex justify-start py-3 xl:p-3">
