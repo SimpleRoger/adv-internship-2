@@ -16,7 +16,7 @@ interface BookProps {
   id: string;
 }
 export default function Book({ id }: BookProps): JSX.Element {
-  const [bookData, setBookData] = useState([]);
+  const [bookData, setBookData] = useState<Book[]>();
   useEffect(() => {
     async function fetchData() {
       const response = await fetch(
@@ -24,13 +24,15 @@ export default function Book({ id }: BookProps): JSX.Element {
       );
       const data = await response.json();
       setBookData(data);
+      // console.log(id);
+      // console.log(data);
       console.log(bookData);
     }
     fetchData();
-  }, [id]);
+  }, []);
   return (
     <div>
-      <h1>Book</h1>
+      <h1>{bookData.author}</h1>
     </div>
   );
 }
