@@ -18,9 +18,11 @@ export default function SelectedBook() {
       {bookData.map((book) => (
         <Link href={"/book/" + book.id} key={book.id} bookData={book}>
           {book.subscriptionRequired ? (
-            <div className="bg-black w-fit h-[18px] px-2 absolute top-0 right-0 text-white text-xs flex items-center rounded-3xl">
-              Premium
-            </div>
+            // <div className="bg-black w-fit h-[18px] px-2 absolute top-0 right-0 text-white text-xs flex rounded-3xl">
+            //   {/* Premium */}
+            // </div>
+            <>
+            </>
           ) : (
             <div></div>
           )}
