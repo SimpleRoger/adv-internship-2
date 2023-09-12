@@ -4,21 +4,28 @@ import { closeCommentModal, closeSignUpModal } from "@/redux/modalSlice";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../../firebase";
 import { useState } from "react";
+import { useRouter } from "next/router";
 
 function SignUpModal() {
   const dispatch = useDispatch();
   const isOpen = useSelector((state) => state.modals.signUpModalOpen);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const router = useRouter();
   async function handleSignUp() {
-    const userCredentials = await createUserWithEmailAndPassword(
-      auth,
-      email,
-      password
-    );
-    router.reload();
+    try {
+      const userCredentials = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      router.push("/for-you");
+    } catch (e) {
+      console.error(e);
+      alert("An error occurred: " + e.message);
+    }
   }
+  
   return (
     <div>
       <Modal

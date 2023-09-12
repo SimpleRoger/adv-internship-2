@@ -1,3 +1,5 @@
+import { useRouter } from "next/router";
+
 import Modal from "@mui/material/Modal";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -5,11 +7,35 @@ import {
   closeLogInModal,
   openSignUpModal,
 } from "@/redux/modalSlice";
+import { useState } from "react";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../firebase";
 
 function AuthModal() {
+  const router = useRouter();
   const dispatch = useDispatch();
   const isOpen = useSelector((state) => state.modals.logInModalOpen);
-
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  async function handleSignIn() {
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      if (location.pathname === "/") {
+        router.push("/for-you");
+      }
+    } catch (e) {
+      console.error(e);
+      alert("An error occurred: " + e.message);
+    }
+  }
+  async function handleTestSignUp() {
+    const userCredentials = await signInWithEmailAndPassword(
+      auth,
+      "testuser@test.com",
+      "123456"
+    );
+    router.push("/for-you");
+  }
   return (
     <div>
       <Modal
@@ -40,7 +66,9 @@ function AuthModal() {
               >
                 <path d="M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128zm89.6 32h-16.7c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16h-16.7C60.2 288 0 348.2 0 422.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-41.6c0-74.2-60.2-134.4-134.4-134.4z"></path>
               </svg>
-              <h3 className="ml-20 text-white ">Login as Guest</h3>
+              <h3 className="ml-20 text-white " onClick={handleTestSignUp}>
+                Login as Guest
+              </h3>
             </div>
             <h3>or</h3>
             <div className=" bg-[#4285f4] flex items-center cursor-pointer p-1 rounded-md">
@@ -52,13 +80,19 @@ function AuthModal() {
             </div>
             <input
               className="w-[100%] h-[36px] border-2 border-solid boder-gray-300 rounded-md p-3"
+              onChange={(e) => setEmail(e.target.value)}
               placeholder="Email Address"
             />
             <input
               className="w-[100%] h-[36px] border-2 border-solid boder-gray-300 rounded-md p-3"
               placeholder="Password"
+              type="password"
+              onChange={(e) => setPassword(e.target.value)}
             />
-            <button className="w-[100%] bg-[#2bd97c] h-[40px] rounded-md">
+            <button
+              className="w-[100%] bg-[#2bd97c] h-[40px] rounded-md"
+              onClick={handleSignIn}
+            >
               Login
             </button>
             <button className="w-[100%]">Forgot your password</button>

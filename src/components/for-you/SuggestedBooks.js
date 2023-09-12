@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React, { useEffect, useState } from "react";
 
 export default function SuggestedBooks() {
@@ -20,7 +21,14 @@ export default function SuggestedBooks() {
       <h3 className="text-l  mt-2 mb-2"> We'll think you'll like these</h3>
       <div className="overflow-x-scroll flex">
         {booksData.map((book) => (
-          <img src={book.imageLink} className="w-[200px]" />
+          <Link
+            className="w-[200px]"
+            href={"/book/" + book.id}
+            key={book.id}
+            bookData={book}
+          >
+            <img src={book.imageLink} className="w-[200px]" />
+          </Link>
         ))}
       </div>
     </div>
