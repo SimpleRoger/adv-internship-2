@@ -7,9 +7,10 @@ import {
   closeLogInModal,
   openSignUpModal,
 } from "@/redux/modalSlice";
-import { useState } from "react";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { useEffect, useState } from "react";
+import { onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase";
+import { setUser } from "@/redux/userSlice";
 
 function AuthModal() {
   const router = useRouter();
@@ -17,12 +18,26 @@ function AuthModal() {
   const isOpen = useSelector((state) => state.modals.logInModalOpen);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      if (!currentUser) return;
+      //handle redux actions
+      dispatch(
+        setUser({
+          email: currentUser.email,
+        })
+      );
+    });
+
+    return unsubscribe;
+  }, []);
   async function handleSignIn() {
     try {
       await signInWithEmailAndPassword(auth, email, password);
       if (location.pathname === "/") {
         router.push("/for-you");
       }
+      router.reload();
     } catch (e) {
       console.error(e);
       alert("An error occurred: " + e.message);
@@ -35,6 +50,7 @@ function AuthModal() {
       "123456"
     );
     router.push("/for-you");
+    router.reload();
   }
   return (
     <div>

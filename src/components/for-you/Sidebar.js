@@ -11,38 +11,69 @@ import {
 } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import AuthModal from "../AuthModal";
-import { openLogInModal } from "@/redux/modalSlice";
+import {
+  closeLogInModal,
+  closeSignUpModal,
+  openLogInModal,
+} from "@/redux/modalSlice";
+import SignUpModal from "../SignUpModal";
+import { auth } from "../../../firebase";
+import { signOut } from "firebase/auth";
 
 function Sidebar() {
-  <AuthModal />;
+  async function handleSignOut() {
+    await signOut(auth);
+    dispatch(signOutUser());
+    dispatch(closeSignUpModal());
+    dispatch(closeLogInModal());
+    
+  }
+  const email = useSelector((state) => state.user.email);
+
   return (
-    <div className="h-screen fixed top-0 left-0 hidden sm:flex pt-2 pl-2 pr-2 flex-col bg-[#f7faf9]">
-      <nav className="h-full relative flex flex-col space-between gap-y-[60%] justify-start text-left">
-        <div>
-          <div className="flex justify-start py-3 xl:p-3">
-            <Image src={"/assets/logo.webp"} width={200} height={34} />
+    <div>
+      <AuthModal />;
+      <SignUpModal />
+      <div className="h-screen fixed top-0 left-0 hidden sm:flex pt-2 pl-2 pr-2 flex-col bg-[#f7faf9]">
+        <nav className="h-full relative flex flex-col space-between gap-y-[60%] justify-start text-left">
+          <div>
+            <div className="flex justify-start py-3 xl:p-3">
+              <Image src={"/assets/logo.webp"} width={200} height={34} />
+            </div>
+            <SidebarLink Icon={AiFillHome} text={"For You"} />
+            {/* <SidebarLink Icon={HashtagIcon} text={"My Library"} /> */}
+            <SidebarLink Icon={AiFillBell} text={"Highlights"} />
+            <SidebarLink Icon={AiOutlineInbox} text={"Search"} />
           </div>
-          <SidebarLink Icon={AiFillHome} text={"For You"} />
-          {/* <SidebarLink Icon={HashtagIcon} text={"My Library"} /> */}
-          <SidebarLink Icon={AiFillBell} text={"Highlights"} />
-          <SidebarLink Icon={AiOutlineInbox} text={"Search"} />
-        </div>
-        <div>
-          <SidebarLink Icon={AiFillBook} text={"Settings"} />
-          <SidebarLink Icon={AiOutlineUser} text={"Help & Support"} />
-          <SidebarLink Icon={AiFillCiCircle} text={"Login"} />
-        </div>
-      </nav>
+          <div>
+            <SidebarLink Icon={AiFillBook} text={"Settings"} />
+            <SidebarLink Icon={AiOutlineUser} text={"Help & Support"} />
+            {!email ? (
+              <SidebarLink
+                Icon={AiFillCiCircle}
+                text={"Login"}
+                click={() => dispatch(logInModalOpen())}
+              />
+            ) : (
+              <SidebarLink
+                Icon={AiFillCiCircle}
+                text={"Logout"}
+                click={() => handleSignOut()}
+              />
+            )}
+          </div>
+        </nav>
+      </div>
     </div>
   );
 }
-function SidebarLink({ text, Icon }) {
+function SidebarLink({ text, Icon, click }) {
   const router = useRouter();
   const dispatch = useDispatch();
   const isOpen = useSelector((state) => state.modals.logInModalOpen);
   return (
     <li
-      onClick={dispatch(openLogInModal)}
+      onClick={click}
       className="hoverAnimation flex ml-3 mb-3 items-center text-xl space-x-3 cursor-pointer text-left
     "
     >
