@@ -37,7 +37,8 @@ function AuthModal() {
       if (location.pathname === "/") {
         router.push("/for-you");
       }
-      router.reload();
+      // router.reload();
+      dispatch(closeLogInModal());
     } catch (e) {
       console.error(e);
       alert("An error occurred: " + e.message);
@@ -50,7 +51,8 @@ function AuthModal() {
       "123456"
     );
     router.push("/for-you");
-    router.reload();
+    // router.reload();
+    dispatch(closeLogInModal());
   }
   return (
     <div>

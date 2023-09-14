@@ -19,20 +19,23 @@ import {
 import SignUpModal from "../SignUpModal";
 import { auth } from "../../../firebase";
 import { signOut } from "firebase/auth";
+import { BiLogOut } from "react-icons/bi";
+import { signOutUser } from "@/redux/userSlice";
 
 function Sidebar() {
+  const dispatch = useDispatch();
+  const isOpen = useSelector((state) => state.modals.logInModalOpen);
   async function handleSignOut() {
     await signOut(auth);
     dispatch(signOutUser());
     dispatch(closeSignUpModal());
     dispatch(closeLogInModal());
-    
   }
   const email = useSelector((state) => state.user.email);
 
   return (
     <div>
-      <AuthModal />;
+      <AuthModal />
       <SignUpModal />
       <div className="h-screen fixed top-0 left-0 hidden sm:flex pt-2 pl-2 pr-2 flex-col bg-[#f7faf9]">
         <nav className="h-full relative flex flex-col space-between gap-y-[60%] justify-start text-left">
@@ -52,11 +55,11 @@ function Sidebar() {
               <SidebarLink
                 Icon={AiFillCiCircle}
                 text={"Login"}
-                click={() => dispatch(logInModalOpen())}
+                click={() => dispatch(openLogInModal())}
               />
             ) : (
               <SidebarLink
-                Icon={AiFillCiCircle}
+                Icon={BiLogOut}
                 text={"Logout"}
                 click={() => handleSignOut()}
               />

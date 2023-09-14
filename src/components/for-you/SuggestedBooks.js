@@ -27,7 +27,14 @@ export default function SuggestedBooks() {
             key={book.id}
             bookData={book}
           >
-            <img src={book.imageLink} className="w-[200px]" />
+            <div className="relative pt-7">
+              <img src={book.imageLink} className="w-[200px] " />
+              {book.subscriptionRequired && (
+                <div className="absolute right-4 top-[0px] text-[12px] text-white bg-red-500 px-2 py-[1px] rounded-md">
+                  Premium
+                </div>
+              )}
+            </div>{" "}
           </Link>
         ))}
       </div>

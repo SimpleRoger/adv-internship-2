@@ -1,6 +1,7 @@
 import Router from "next/router";
 import React, { useEffect, useState } from "react";
 import { Book } from "../../../types";
+import { useRouter } from "next/router";
 import { GetServerSidePropsContext } from "next";
 import { BiBookmark, BiStar } from "react-icons/bi";
 import {
@@ -12,6 +13,9 @@ import Sidebar from "/Users/rogertan/front-end-simplified/adv_intern_3/src/compo
 import SearchBar from "/Users/rogertan/front-end-simplified/adv_intern_3/src/components/for-you/SearchBar.js";
 import { BsFillBookmarkFill, BsFillBookmarkXFill, BsMic } from "react-icons/bs";
 import { RiBookMarkLine } from "react-icons/ri";
+import { useDispatch, useSelector } from "react-redux";
+import { openLogInModal } from "@/redux/modalSlice";
+import AuthModal from "@/components/AuthModal";
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const id = context.query.id;
@@ -25,7 +29,27 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 interface BookProps {
   id: string;
 }
+type slice = {
+  user: userSlice; // Replace 'string' with the actual data type of 'someValue'.
+  modals: modalSlice;
+};
+
+type userSlice = {
+  email: string;
+  subscribed: boolean;
+};
+type modalSlice = {
+  logInModalOpen: boolean;
+};
+
 export default function Book({ id }: BookProps): JSX.Element {
+  const router = useRouter();
+  const dispatch = useDispatch();
+  const isOpen = useSelector((state: slice) => state.modals.logInModalOpen);
+  // get email
+  const email = useSelector((state: slice) => state.user.email);
+  const subscribed = useSelector((state: slice) => state.user.subscribed);
+
   const [bookData, setBookData] = useState<Book>();
   useEffect(() => {
     async function fetchData() {
@@ -34,16 +58,34 @@ export default function Book({ id }: BookProps): JSX.Element {
       );
       const data = await response.json();
       setBookData(data);
-      // console.log(id);
-      // console.log(data);
       console.log(bookData);
     }
     fetchData();
   }, []);
+
+  //read function
+  function read() {
+    if (!email) {
+      dispatch(openLogInModal());
+    }
+    if (bookData?.subscriptionRequired != subscribed) {
+      router.push("/choose-plan"); // Replace '/new-route' with the actual path.
+    }
+    else {
+      router.push(`/player/id}`); // Replace '/new-route' with the actual path.
+    }
+  }
+  //listen function
+  function listen() {
+    if (!email) {
+      dispatch(openLogInModal());
+    }
+  }
   return (
-    <div className="flex flex-col width-[100%] ml-[200px]">
+    <div className="flex flex-col width-[100%] ml-[200px] md:ml-[300px]">
       <SearchBar />
       <Sidebar />
+      {/* <AuthModal />  */}
       <div className="max-w-[1070px] w-[100%] mx-auto p-2">
         <div className="width-[100%]">
           <div className="flex gap-[16px]">
@@ -89,7 +131,7 @@ export default function Book({ id }: BookProps): JSX.Element {
                 transition-opacity duration-200 ease-in-out"
                 >
                   <AiOutlineBook />
-                  <div>Read</div>
+                  <div onClick={read}>Read</div>
                 </button>
                 <button
                   className="flex items-center justify-center w-[144px] h-[48px] bg-[#032b41] 
@@ -97,7 +139,7 @@ export default function Book({ id }: BookProps): JSX.Element {
                 transition-opacity duration-200 ease-in-out"
                 >
                   <BsMic />
-                  <div>Listen</div>
+                  <div onClick={listen}>Listen</div>
                 </button>
               </div>
               <div className="flex items-center gap-[8px] text-[#0365f2] font-semibold cursor-pointer mb-[40px] text-[18px] transition-color duration 200 ease-in-out">
