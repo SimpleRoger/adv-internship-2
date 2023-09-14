@@ -1,11 +1,11 @@
 import DisplayTrack from "./DisplayTrack";
 import Controls from "./Controls";
 import ProgressBar from "./ProgressBar";
-import { useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 
 const AudioPlayer = (audio) => {
     // <audio src=" " controls />
-    const audioRef = useRef();
+    const audioRef = useRef(null);
 
   return (
     <div className="">
@@ -18,4 +18,4 @@ const AudioPlayer = (audio) => {
     </div>
   );
 };
-export default AudioPlayer;
+export default React.forwardRef(AudioPlayer);

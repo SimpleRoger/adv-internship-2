@@ -72,7 +72,7 @@ export default function Book({ id }) {
       router.push("/choose-plan"); // Replace '/new-route' with the actual path.
     }
     else {
-      router.push(`/player/id}`); // Replace '/new-route' with the actual path.
+      router.push(`/player/${id}`); // Replace '/new-route' with the actual path.
     }
   }
   //listen function
