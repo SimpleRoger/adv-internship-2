@@ -17,7 +17,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { openLogInModal } from "@/redux/modalSlice";
 import AuthModal from "@/components/AuthModal";
 
-export async function getServerSideProps() {
+export async function getServerSideProps(context) {
   const id = context.query.id;
   return {
     props: {
