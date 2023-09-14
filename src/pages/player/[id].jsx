@@ -35,7 +35,7 @@ export default function Player({ id }) {
             {bookData?.title}
           </h1>
           <p>{bookData?.summary}</p>
-          <AudioPlayer />
+          <AudioPlayer audio={bookData?.audioLink}/>
         </div>
       </div>
     </div>
