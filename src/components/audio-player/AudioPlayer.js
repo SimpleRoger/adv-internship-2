@@ -11,8 +11,6 @@ const AudioPlayer = (audio) => {
     <div className="">
       <div className="">
         {audio.audio}
-        {/* <audio src={audio.audio} /> */}
-
         <DisplayTrack audio={audio.audio} audioRef={audioRef}/>
         <Controls audioRef={audioRef}/>
         <ProgressBar />

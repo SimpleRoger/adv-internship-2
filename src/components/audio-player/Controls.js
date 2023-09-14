@@ -11,7 +11,7 @@ import {
   IoPauseSharp,
 } from "react-icons/io5";
 
-const Controls = () => {
+const Controls = (audioRef) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const togglePlayPause = () => {
     setIsPlaying((prev) => !prev);

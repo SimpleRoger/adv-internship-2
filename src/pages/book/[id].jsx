@@ -17,7 +17,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { openLogInModal } from "@/redux/modalSlice";
 import AuthModal from "@/components/AuthModal";
 
-export async function getServerSideProps(context: GetServerSidePropsContext) {
+export async function getServerSideProps() {
   const id = context.query.id;
   return {
     props: {
@@ -26,23 +26,23 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   };
 }
 
-interface BookProps {
-  id: string;
-}
-type slice = {
-  user: userSlice; // Replace 'string' with the actual data type of 'someValue'.
-  modals: modalSlice;
-};
+// interface BookProps {
+//   id: string;
+// }
+// type slice = {
+//   user: userSlice; // Replace 'string' with the actual data type of 'someValue'.
+//   modals: modalSlice;
+// };
 
-type userSlice = {
-  email: string;
-  subscribed: boolean;
-};
-type modalSlice = {
-  logInModalOpen: boolean;
-};
+// type userSlice = {
+//   email: string;
+//   subscribed: boolean;
+// };
+// type modalSlice = {
+//   logInModalOpen: boolean;
+// };
 
-export default function Book({ id }: BookProps): JSX.Element {
+export default function Book({ id }) {
   const router = useRouter();
   const dispatch = useDispatch();
   const isOpen = useSelector((state: slice) => state.modals.logInModalOpen);
