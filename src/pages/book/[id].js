@@ -1,6 +1,6 @@
 import Router from "next/router";
 import React, { useEffect, useState } from "react";
-import { Book } from "../../../types";
+// import { Book } from "../../../types";
 import { useRouter } from "next/router";
 import { GetServerSidePropsContext } from "next";
 import { BiBookmark, BiStar } from "react-icons/bi";
