@@ -45,12 +45,12 @@ export async function getServerSideProps() {
 export default function Book({ id }) {
   const router = useRouter();
   const dispatch = useDispatch();
-  const isOpen = useSelector((state: slice) => state.modals.logInModalOpen);
+  const isOpen = useSelector((state) => state.modals.logInModalOpen);
   // get email
-  const email = useSelector((state: slice) => state.user.email);
-  const subscribed = useSelector((state: slice) => state.user.subscribed);
+  const email = useSelector((state) => state.user.email);
+  const subscribed = useSelector((state) => state.user.subscribed);
 
-  const [bookData, setBookData] = useState<Book>();
+  const [bookData, setBookData] = useState();
   useEffect(() => {
     async function fetchData() {
       const response = await fetch(
