@@ -9,8 +9,8 @@ import {
   AiOutlineBulb,
   AiOutlineClockCircle,
 } from "react-icons/ai";
-import Sidebar from "/Users/rogertan/front-end-simplified/adv_intern_3/src/components/for-you/Sidebar.js";
-import SearchBar from "/Users/rogertan/front-end-simplified/adv_intern_3/src/components/for-you/SearchBar.js";
+import Sidebar from "../../components/for-you/Sidebar";
+import SearchBar from "../../components/for-you/SearchBar";
 import { BsFillBookmarkFill, BsFillBookmarkXFill, BsMic } from "react-icons/bs";
 import { RiBookMarkLine } from "react-icons/ri";
 import { useDispatch, useSelector } from "react-redux";
