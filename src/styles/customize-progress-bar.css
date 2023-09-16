@@ -1,0 +1,12 @@
+input[type="range"] {
+    --range-progress: 0%;
+    width: 400px;
+    /* ... */
+  }
+  
+  input[type="range"]::before {
+    /* ... */
+    background: #f50;
+    width: var(--range-progress);
+    /* ... */
+  }

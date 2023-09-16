@@ -3,6 +3,7 @@ import Sidebar from "@/components/for-you/Sidebar";
 import React, { useEffect, useState } from "react";
 import AudioPlayer from "../../components/audio-player/AudioPlayer";
 
+
 export async function getServerSideProps(context) {
   const id = context.query.id;
   return {
@@ -27,7 +28,7 @@ export default function Player({ id }) {
 
   return (
     <div>
-      <Sidebar />
+      <Sidebar audioPlayer="valid" />
       <SearchBar />
       <div className="w-[100%]">
         <div className="flex flex-col max-w-4xl xl:ml-[300px] mx-auto">
@@ -35,7 +36,7 @@ export default function Player({ id }) {
             {bookData?.title}
           </h1>
           <p>{bookData?.summary}</p>
-          <AudioPlayer audio={bookData?.audioLink}/>
+          <Player bookData={bookData}/>
         </div>
       </div>
     </div>
