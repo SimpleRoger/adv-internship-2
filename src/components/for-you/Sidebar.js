@@ -22,7 +22,7 @@ import { signOut } from "firebase/auth";
 import { BiLogOut } from "react-icons/bi";
 import { signOutUser } from "@/redux/userSlice";
 
-function Sidebar({ audioPlayer }) {
+function Sidebar() {
   const dispatch = useDispatch();
   const isOpen = useSelector((state) => state.modals.logInModalOpen);
   async function handleSignOut() {
@@ -39,34 +39,34 @@ function Sidebar({ audioPlayer }) {
       <SignUpModal />
       <div className="h-screen fixed top-0 left-0 hidden sm:flex pt-2 pl-2 pr-2 flex-col bg-[#f7faf9]">
         <nav className="h-full relative flex flex-col space-between gap-y-[60%] justify-start text-left">
-          <div className={(audioPlayer == "valid") && "h-[80%]"}>
-            <div>
-              <div className="flex justify-start py-3 xl:p-3">
-                <Image src={"/assets/logo.webp"} width={200} height={34} />
-              </div>
-              <SidebarLink Icon={AiFillHome} text={"For You"} />
-              {/* <SidebarLink Icon={HashtagIcon} text={"My Library"} /> */}
-              <SidebarLink Icon={AiFillBell} text={"Highlights"} />
-              <SidebarLink Icon={AiOutlineInbox} text={"Search"} />
+          {/* <div className={(audioPlayer == "valid") && "h-[80%]"}> */}
+          <div>
+            <div className="flex justify-start py-3 xl:p-3">
+              <Image src={"/assets/logo.webp"} width={200} height={34} />
             </div>
-            <div>
-              <SidebarLink Icon={AiFillBook} text={"Settings"} />
-              <SidebarLink Icon={AiOutlineUser} text={"Help & Support"} />
-              {!email ? (
-                <SidebarLink
-                  Icon={AiFillCiCircle}
-                  text={"Login"}
-                  click={() => dispatch(openLogInModal())}
-                />
-              ) : (
-                <SidebarLink
-                  Icon={BiLogOut}
-                  text={"Logout"}
-                  click={() => handleSignOut()}
-                />
-              )}
-            </div>
+            <SidebarLink Icon={AiFillHome} text={"For You"} />
+            {/* <SidebarLink Icon={HashtagIcon} text={"My Library"} /> */}
+            <SidebarLink Icon={AiFillBell} text={"Highlights"} />
+            <SidebarLink Icon={AiOutlineInbox} text={"Search"} />
           </div>
+          <div>
+            <SidebarLink Icon={AiFillBook} text={"Settings"} />
+            <SidebarLink Icon={AiOutlineUser} text={"Help & Support"} />
+            {!email ? (
+              <SidebarLink
+                Icon={AiFillCiCircle}
+                text={"Login"}
+                click={() => dispatch(openLogInModal())}
+              />
+            ) : (
+              <SidebarLink
+                Icon={BiLogOut}
+                text={"Logout"}
+                click={() => handleSignOut()}
+              />
+            )}
+          </div>
+          {/* </div> */}
         </nav>
       </div>
     </div>

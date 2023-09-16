@@ -28,7 +28,7 @@ export default function Player({ id }) {
 
   return (
     <div>
-      <Sidebar audioPlayer="valid" />
+      <Sidebar />
       <SearchBar />
       <div className="w-[100%]">
         <div className="flex flex-col max-w-4xl xl:ml-[300px] mx-auto">
@@ -36,7 +36,7 @@ export default function Player({ id }) {
             {bookData?.title}
           </h1>
           <p>{bookData?.summary}</p>
-          <Player bookData={bookData}/>
+          <Player bookData={bookData} />
         </div>
       </div>
     </div>
