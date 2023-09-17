@@ -21,10 +21,10 @@ const DisplayTrack = ({ song, audioRef, setDuration, progressBarRef }) => {
           onLoadedMetadata={onLoadedMetadata}
         //   onEnded={repeat}
         />
-        <div className="audio-info flex items-center">
+        <div className="audio-info flex items-center my-2">
           <div className="audio-image">
             {song?.imageLink ? (
-              <img src={song?.imageLink} className="w-[100px]" alt="audio avatar" />
+              <img src={song?.imageLink} className="w-[80px]" alt="audio avatar" />
             ) : (
               <div className="icon-wrapper">
                 <span className="audio-icon">

@@ -22,7 +22,7 @@ import { signOut } from "firebase/auth";
 import { BiLogOut } from "react-icons/bi";
 import { signOutUser } from "@/redux/userSlice";
 
-function Sidebar() {
+function Sidebar({ audioPage }) {
   const dispatch = useDispatch();
   const isOpen = useSelector((state) => state.modals.logInModalOpen);
   async function handleSignOut() {
@@ -33,13 +33,16 @@ function Sidebar() {
   }
   const email = useSelector((state) => state.user.email);
 
+  const commonStyles =
+    "h-full relative flex flex-col space-between gap-y-[60%] justify-start text-left";
+  const specialStyles = "pb-[50px]";
+  const styling = audioPage ? `${commonStyles} ${specialStyles}` : commonStyles;
   return (
     <div>
       <AuthModal />
       <SignUpModal />
       <div className="h-screen fixed top-0 left-0 hidden sm:flex pt-2 pl-2 pr-2 flex-col bg-[#f7faf9]">
-        <nav className="h-full relative flex flex-col space-between gap-y-[60%] justify-start text-left">
-          {/* <div className={(audioPlayer == "valid") && "h-[80%]"}> */}
+        <nav className={styling}>
           <div>
             <div className="flex justify-start py-3 xl:p-3">
               <Image src={"/assets/logo.webp"} width={200} height={34} />
@@ -66,7 +69,6 @@ function Sidebar() {
               />
             )}
           </div>
-          {/* </div> */}
         </nav>
       </div>
     </div>

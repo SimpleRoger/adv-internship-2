@@ -8,13 +8,20 @@ import {
   openSignUpModal,
 } from "@/redux/modalSlice";
 import { useEffect, useState } from "react";
-import { onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
+import {
+  GoogleAuthProvider,
+  getAuth,
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+} from "firebase/auth";
 import { auth } from "../../firebase";
 import { setUser } from "@/redux/userSlice";
 
 function AuthModal() {
   const router = useRouter();
   const dispatch = useDispatch();
+  const provider = new GoogleAuthProvider();
   const isOpen = useSelector((state) => state.modals.logInModalOpen);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -36,6 +43,22 @@ function AuthModal() {
       await signInWithEmailAndPassword(auth, email, password);
       if (location.pathname === "/") {
         router.push("/for-you");
+      }
+      // router.reload();
+      dispatch(closeLogInModal());
+    } catch (e) {
+      console.error(e);
+      alert("An error occurred: " + e.message);
+    }
+  }
+  async function handleGoogleSignIn() {
+    try {
+      const result = signInWithPopup(auth, provider);
+      const user = result.user;
+      if (user) {
+        if (location.pathname === "/") {
+          router.push("/for-you");
+        }
       }
       // router.reload();
       dispatch(closeLogInModal());
@@ -94,7 +117,12 @@ function AuthModal() {
                 src="/assets/google.png"
                 className="w-9 bg-white p-1 rounded-md"
               />
-              <h3 className="ml-20 text-white rounded-md">Login with Google</h3>
+              <h3
+                className="ml-20 text-white rounded-md"
+                onClick={handleGoogleSignIn}
+              >
+                Login with Google
+              </h3>
             </div>
             <input
               className="w-[100%] h-[36px] border-2 border-solid boder-gray-300 rounded-md p-3"
