@@ -1,8 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import { HiDocumentText } from "react-icons/hi";
 import { RiPlantFill } from "react-icons/ri";
 import { FaHandshake } from "react-icons/fa";
+import { app } from "@/firebase";
+
+import { getCheckOutUrl } from "../components/choose-plan/stripePayment";
+import { useRouter } from "next/navigation";
+
 export default function choosePlan() {
+  const router = useRouter();
+  const [selectedOption, setSelectedOption] = useState("option1");
+
+  const handleButtonClick = (option) => {
+    setSelectedOption(option);
+  };
+
+  const checkOut = async () => {
+    const priceId = "price_1NrZfqG0JjiKJbF2vtYajBhV";
+    const checkOutUrl = await getCheckOutUrl(app, priceId);
+    router.push(checkOutUrl);
+  };
   return (
     <div>
       <div className="bg-[#032b41] w-full h-full rounded-br-[16rem] rounded-bl-[16rem] text-white flex flex-col items-center gap-10 pt-10">
@@ -29,8 +46,46 @@ export default function choosePlan() {
             <p>Precise recommendations collections curated by experts</p>
           </div>
         </div>
-        <div>
-            <h1>Choose the plan that fits you</h1>
+        <div className="flex gap-10 flex-col w-full">
+          <h1 className="text-center font-semibold text-[20px]">
+            Choose the plan that fits you
+          </h1>
+          <div
+            className="flex p-[24px] bg-[#f1f6f4] rounded-md max-w-[680px] mx-auto gap-[24px] w-full "
+            onClick={() => handleButtonClick("option1")}
+          >
+            <div
+              className={`w-[24px] h-[24px] border-black rounded-full border-2 ${
+                selectedOption === "option1" ? "selected" : ""
+              }`}
+            ></div>
+            <div className="flex flex-col gap-3">
+              <h2 className="font-extrabold">Premium Plus Yearly</h2>
+              <h1 className="font-extrabold text-[28px]">$99.99/year</h1>
+              <p>7-day free trial included</p>
+            </div>
+          </div>
+          <div className="text-[#6b757b] max-w-[240px] flex justify-center mx-auto items-center gap-[8px] ">
+            <div class="border-t border-solid border-black my-4 w-full"></div>
+            <div className="text-center">or</div>
+            <div class="border-t border-solid border-gray-300 my-4 w-full"></div>
+          </div>
+          <div
+            className="flex p-[24px] bg-[#f1f6f4] rounded-md max-w-[680px] mx-auto gap-[24px] w-full"
+            onClick={() => handleButtonClick("option2")}
+          >
+            <div
+              className={`w-[24px] h-[24px] border-black rounded-full border-2 ${
+                selectedOption === "option2" ? "selected" : ""
+              }`}
+            ></div>
+            <div className="flex flex-col gap-3">
+              <h2 className="font-extrabold">Premium Monthly</h2>
+              <h1 className="font-extrabold text-[28px]">$9.99/year</h1>
+              <p>No trial included</p>
+            </div>
+          </div>
+          <button onClick={checkOut}>Start your first month</button>
         </div>
       </div>
     </div>

@@ -545,3 +545,16 @@ button:disabled {
     display: none;
   }
 }
+
+.selected {
+  background-color: black; 
+  /* padding: 10px; */
+  /* width: 10px;
+  height: 10px;
+  content: "";
+  margin: 5px;
+  border-radius: 10px; */
+  /* border: #032b41 2px;  */
+  /* position: absolute; */
+  /* position: absolute; */
+}

@@ -2,6 +2,9 @@ import { useRouter } from "next/router";
 
 import Modal from "@mui/material/Modal";
 import { useDispatch, useSelector } from "react-redux";
+// import { useNavigate } from "react-router-dom";
+
+// import {useNavigate} from "react/"
 import {
   closeCommentModal,
   closeLogInModal,
@@ -52,19 +55,23 @@ function AuthModal() {
     }
   }
   async function handleGoogleSignIn() {
+    const user = "";
+    
     try {
       const result = signInWithPopup(auth, provider);
       const user = result.user;
-      if (user) {
-        if (location.pathname === "/") {
-          router.push("/for-you");
-        }
-      }
       // router.reload();
       dispatch(closeLogInModal());
+      router.push("/for-you");
+
     } catch (e) {
       console.error(e);
       alert("An error occurred: " + e.message);
+    }
+    if (user) {
+      router.push("/for-you");
+      if (location.pathname === "/") {
+      }
     }
   }
   async function handleTestSignUp() {
