@@ -1,15 +1,32 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { HiDocumentText } from "react-icons/hi";
 import { RiPlantFill } from "react-icons/ri";
 import { FaHandshake } from "react-icons/fa";
-import { app } from "@/firebase";
+import { app } from "../../firebase";
 
-import { getCheckOutUrl } from "../components/choose-plan/stripePayment";
+import {
+  getCheckoutUrl,
+  getPremiumStatus,
+} from "../components/choose-plan/stripePayment";
+
 import { useRouter } from "next/navigation";
+import { getAuth } from "firebase/auth";
 
 export default function choosePlan() {
   const router = useRouter();
+  const auth = getAuth(app);
   const [selectedOption, setSelectedOption] = useState("option1");
+  const [isPremium, setIsPremium] = useState(false);
+
+  useEffect(() => {
+    const checkPremium = async () => {
+      const newPremiumStatus = auth.currentUser
+        ? await getPremiumStatus(app)
+        : false;
+      setIsPremium(newPremiumStatus);
+    };
+    console.log(isPremium);
+  }, [app, auth.currentUser?.id]);
 
   const handleButtonClick = (option) => {
     setSelectedOption(option);
@@ -17,7 +34,7 @@ export default function choosePlan() {
 
   const checkOut = async () => {
     const priceId = "price_1NrZfqG0JjiKJbF2vtYajBhV";
-    const checkOutUrl = await getCheckOutUrl(app, priceId);
+    const checkOutUrl = await getCheckoutUrl(app, priceId);
     router.push(checkOutUrl);
   };
   return (

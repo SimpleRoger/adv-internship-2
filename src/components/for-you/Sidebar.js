@@ -1,6 +1,8 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { AiFillAudio, AiFillBulb, AiFillFileText } from "react-icons/ai";
+import Link from "next/link";
+import { IoIosSettings } from "react-icons/io";
 import {
   AiFillHome,
   AiFillBell,
@@ -37,6 +39,7 @@ function Sidebar({ audioPage }) {
     "h-full relative flex flex-col space-between gap-y-[60%] justify-start text-left";
   const specialStyles = "pb-[50px]";
   const styling = audioPage ? `${commonStyles} ${specialStyles}` : commonStyles;
+
   return (
     <div>
       <AuthModal />
@@ -47,13 +50,18 @@ function Sidebar({ audioPage }) {
             <div className="flex justify-start py-3 xl:p-3">
               <Image src={"/assets/logo.webp"} width={200} height={34} />
             </div>
-            <SidebarLink Icon={AiFillHome} text={"For You"} />
+            <Link href="/for-you">
+              <SidebarLink Icon={AiFillHome} text={"For You"} />
+            </Link>
             {/* <SidebarLink Icon={HashtagIcon} text={"My Library"} /> */}
             <SidebarLink Icon={AiFillBell} text={"Highlights"} />
             <SidebarLink Icon={AiOutlineInbox} text={"Search"} />
           </div>
           <div>
-            <SidebarLink Icon={AiFillBook} text={"Settings"} />
+            {/* settings page */}
+            <Link href="/settings">
+              <SidebarLink Icon={IoIosSettings} text={"Settings"} />
+            </Link>
             <SidebarLink Icon={AiOutlineUser} text={"Help & Support"} />
             {!email ? (
               <SidebarLink

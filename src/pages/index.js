@@ -9,20 +9,29 @@ import Numbers from "@/components/Numbers";
 import Footer from "@/components/Footer";
 import AuthModal from "@/components/AuthModal";
 import SignUpModal from "@/components/SignUpModal";
+import { useSelector } from "react-redux";
+import { useRouter } from "next/router";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
+  const user = useSelector((state) => state.user);
+  const router = useRouter();
+  if (user.email != null) {
+    router.push("/for-you");
+  }
   return (
     <>
       <SignUpModal />
       <AuthModal />
       <Navbar1 />
-      <Landing1 />
-      <Features />
-      <Reviews />
-      <Numbers />
-      <Footer />
+      <div className=" mx-auto max px-auto items-center flex flex-col">
+        <Landing1 />
+        <Features />
+        <Reviews />
+        <Numbers />
+        <Footer />
+      </div>
     </>
   );
 }

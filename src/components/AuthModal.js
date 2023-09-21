@@ -71,6 +71,7 @@ function AuthModal() {
     if (user) {
       router.push("/for-you");
       if (location.pathname === "/") {
+        
       }
     }
   }

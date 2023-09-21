@@ -21,18 +21,19 @@ export default function SelectedBook() {
             // <div className="bg-black w-fit h-[18px] px-2 absolute top-0 right-0 text-white text-xs flex rounded-3xl">
             //   {/* Premium */}
             // </div>
-            <>
-            </>
+            <></>
           ) : (
             <div></div>
           )}
           <div className="mb-[50px]">
-            <h1 className="font-bold text-xl mb-2 mt-2" >Selected just for you</h1>
+            <h1 className="font-bold text-xl mb-2 mt-2">
+              Selected just for you
+            </h1>
             <div className="flex bg-slate-200 w-[50%]">
-              <div className="text-sm text-black mb-2  w-[200px]">{book.subTitle}</div>
-              <div className="w-[1px] h-[150px] bg-black mx-5">
-
+              <div className="text-sm text-black mb-2  w-[200px]">
+                {book.subTitle}
               </div>
+              <div className="w-[1px] h-[150px] bg-black mx-5"></div>
               <div className="mb-2 w-[172px] h-[172px]">
                 <img src={book.imageLink} alt="bookImg" />
               </div>

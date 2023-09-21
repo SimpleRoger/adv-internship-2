@@ -1,8 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+
 const initialState = {
   email: null,
-  subscribed: null,
+  subscribed: "Basic",
 };
 
 const userSlice = createSlice({
@@ -11,10 +12,13 @@ const userSlice = createSlice({
   reducers: {
     setUser: (state, action) => {
       state.email = action.payload.email;
-      state.subscribed = false;
+      state.subscribed = "Basic";
     },
     signOutUser: (state) => {
       state.email = null; // Remove the comma here
+    },
+    upgradeUser: (state) => {
+      state.subscribed = "Premium"; // Remove the comma here
     },
   },
 });

@@ -81,3 +81,4 @@ export const getPortalUrl = async (app: FirebaseApp): Promise<string> => {
     }
   });
 };
+
