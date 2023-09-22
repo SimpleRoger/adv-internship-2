@@ -12,10 +12,10 @@ const inter = Inter({ subsets: ["latin"] });
 export default function ForYou() {
   return (
     // <div className="flex flex-col items-center width-[100%]">
-    <div className="flex flex-col width-[100%] ml-[200px]">
+    <div className="flex flex-col width-[100%] md:ml-[150px]">
       <SearchBar />
       <Sidebar />
-      <div className="flex flex-col width-[100%] max-w-[1070px] mx-auto xl:ml-[100px]">
+      <div className="flex flex-col width-[100%] max-w-[1070px]  mx-auto min-w-[400px]">
         <SelectedBook />
         <Recommended />
         <SuggestedBooks />
