@@ -44,10 +44,10 @@ function Sidebar({ audioPage }) {
     <div>
       <AuthModal />
       <SignUpModal />
-      <div className="h-screen fixed top-0 left-0 hidden sm:flex pt-2 pl-2 pr-2 flex-col bg-[#f7faf9]">
+      <div className="static h-screen top-0 left-0  md:fixed hidden pt-2 pl-2 pr-2 flex-col bg-[#f7faf9]">
         <nav className={styling}>
           <div>
-            <div className="flex justify-start py-3 xl:p-3">
+            <div className="flex justify-start py-3 px-3">
               <Image src={"/assets/logo.webp"} width={200} height={34} />
             </div>
             <Link href="/for-you">

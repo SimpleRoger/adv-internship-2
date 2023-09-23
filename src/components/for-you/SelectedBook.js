@@ -25,12 +25,12 @@ export default function SelectedBook() {
           ) : (
             <div></div>
           )}
-          <div className="mb-[50px]">
+          <div className=" mb-[50px] xl:w-[700px]">
             <h1 className="font-bold text-xl mb-2 mt-2">
               Selected just for you
             </h1>
-            <div className="flex bg-slate-200 w-[100%] flex-col sm:flex-row">
-              <div className="text-sm text-black mb-2  w-[40%] md:border md:border-r-gray-300">
+            <div className="flex bg-slate-200 w-[100%] flex-col lg:flex-row">
+              <div className="text-sm text-black mb-2  w-[40%] lg:border lg:border-r-gray-300">
                 {book.subTitle}
               </div>
               <div className="mb-2 w-[172px] h-[172px] px-5">

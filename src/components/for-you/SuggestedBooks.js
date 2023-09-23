@@ -18,10 +18,10 @@ export default function SuggestedBooks() {
   }, []);
   console.log(booksData);
   return (
-    <div className="mx-auto mb-10 max-w-[400px] ml-0 md:max-w-[800px]">
+    <div className="mx-auto mb-10 max-w-[400px] ml-0 md:max-w-[1100px] w-[calc(100vw-400px)]">
       <h1 className="font-bold text-xl mb-2 mt-2">Suggested for you</h1>
       <h3 className="text-l  mt-2 mb-2"> We'll think you'll like these</h3>
-      <div className="overflow-x-scroll flex max-w-[1000px]">
+      <div className="overflow-x-scroll flex max-w-[1200px] w-[100%]">
         {booksData.map((book) => (
           <Link
             className="w-[200px]"
