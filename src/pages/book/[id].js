@@ -70,8 +70,12 @@ export default function Book({ id }) {
   function read() {
     if (!email) {
       dispatch(openLogInModal());
-    }
-    if (bookData?.subscriptionRequired != subscribed) {
+    } else if (
+      bookData?.subscriptionRequired == true &&
+      subscribed != "basic"
+    ) {
+      console.log(bookData?.subscriptionRequired);
+      console.log(subscribed);
       router.push("/choose-plan"); // Replace '/new-route' with the actual path.
     } else {
       router.push(`/player/${id}`); // Replace '/new-route' with the actual path.

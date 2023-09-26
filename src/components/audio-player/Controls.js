@@ -29,11 +29,13 @@ const Controls = ({ audioRef, progressBarRef, setTimeProgress, duration }) => {
   const repeat = useCallback(() => {
     const currentTime = audioRef.current?.currentTime;
     setTimeProgress(currentTime);
-    progressBarRef.current.value = currentTime;
-    progressBarRef.current.style.setProperty(
-      "--range-progress",
-      `${(progressBarRef.current.value / duration) * 100}%`
-    );
+    if (progressBarRef.current) {
+      progressBarRef.current.value = currentTime || 0;
+      progressBarRef.current.style.setProperty(
+        "--range-progress",
+        `${(progressBarRef.current.value / duration) * 100}%`
+      );
+    }
 
     playAnimationRef.current = requestAnimationFrame(repeat);
   }, [audioRef, duration, progressBarRef, setTimeProgress]);
@@ -67,7 +69,7 @@ const Controls = ({ audioRef, progressBarRef, setTimeProgress, duration }) => {
           )}
         </button>
         <button onClick={skipForward}>
-          <TbRewindForward15 size={28}/>
+          <TbRewindForward15 size={28} />
         </button>
       </div>
     </div>

@@ -15,7 +15,7 @@ export default function ForYou() {
     <div className="flex flex-col width-[100%] md:ml-[150px]">
       <SearchBar />
       <Sidebar />
-      <div className=" ml-[150px]">
+      <div className=" md:ml-[150px] ml-10">
         <div className="flex flex-col width-[100%] max-w-[1200px]  mx-auto min-w-[400px]">
           <SelectedBook />
           <Recommended />

@@ -10,6 +10,7 @@ import Link from "next/link";
 
 export default function settings() {
   const user = useSelector((state) => state.user);
+  const email = useSelector((state) => state.user.email);
   const [isPremium, setIsPremium] = useState(false);
   const router = useRouter();
 
@@ -33,26 +34,44 @@ export default function settings() {
     <>
       <Sidebar />
       <Searchbar />
-      <div className="max-w-[1080px] w-full flex flex-col items-center mx-auto">
-        <h1>Settings</h1>
-        <h2>Your subscription plan</h2>
-        {isPremium ? <p>Premium</p> : <p>Basic</p>}
-        {!isPremium ? (
-          <Link href="/choose-plan">
-            <button className="bg-[#2bd97c] text-[#032b41] h-[40px] rounded-md text-[16px] min-w-[180px]">
-              Upgrade to Premium
-            </button>
-          </Link>
+      <div className="max-w-[600px] w-full flex flex-col ml-[300px] space-y-5">
+        <h1 className="text-[30px] font-extrabold border-b border-gray-200">
+          Settings
+        </h1>
+
+        {email == null ? (
+          <div>
+            <h1>Login to your account to see your details</h1>
+          </div>
         ) : (
-          <button
-            className="bg-[#2bd97c] text-[#032b41] h-[40px] rounded-md text-[16px] min-w-[180px]"
-            onClick={manageSubscription}
-          >
-            Manage subscription
-          </button>
+          <>
+            <h2 className="text-[20px]">Your subscription plan</h2>
+            {isPremium ? (
+              <p>Premium</p>
+            ) : (
+              <p className="border-b border-gray-200 pb-5">Basic</p>
+            )}
+            {!isPremium ? (
+              <Link href="/choose-plan">
+                <button
+                  className="bg-[#2bd97c] text-[#032b41] h-[40px] rounded-md text-[16px] min-w-[180px] border-b border-gray-200 
+            pb-5 flex items-center justify-center pt-5"
+                >
+                  Upgrade to Premium
+                </button>
+              </Link>
+            ) : (
+              <button
+                className="bg-[#2bd97c] text-[#032b41] h-[40px] rounded-md text-[16px] min-w-[180px]"
+                onClick={manageSubscription}
+              >
+                Manage subscription
+              </button>
+            )}
+            <h1>Email</h1>
+            <h2>{user.email}</h2>
+          </>
         )}
-        <h1>Email</h1>
-        <h2>{user.email}</h2>
       </div>
     </>
   );

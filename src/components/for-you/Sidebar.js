@@ -36,7 +36,7 @@ function Sidebar({ audioPage }) {
   const email = useSelector((state) => state.user.email);
 
   const commonStyles =
-    "h-full relative flex flex-col space-between gap-y-[60%] justify-start text-left";
+    "h-full relative flex flex-col space-between gap-y-[40%] justify-start text-left";
   const specialStyles = "pb-[50px]";
   const styling = audioPage ? `${commonStyles} ${specialStyles}` : commonStyles;
 
@@ -44,9 +44,9 @@ function Sidebar({ audioPage }) {
     <div>
       <AuthModal />
       <SignUpModal />
-      <div className="static h-screen top-0 left-0  md:fixed hidden pt-2 pl-2 pr-2 flex-col bg-[#f7faf9]">
+      <div className=" h-screen top-0 left-0  md:block fixed w-[250px] hidden pt-2 pl-2 pr-2 flex-col bg-[#f7faf9]">
         <nav className={styling}>
-          <div>
+          <div className="flex flex-col gap-5">
             <div className="flex justify-start py-3 px-3">
               <Image src={"/assets/logo.webp"} width={200} height={34} />
             </div>
@@ -57,7 +57,7 @@ function Sidebar({ audioPage }) {
             <SidebarLink Icon={AiFillBell} text={"Highlights"} />
             <SidebarLink Icon={AiOutlineInbox} text={"Search"} />
           </div>
-          <div>
+          <div className="flex flex-col gap-5">
             {/* settings page */}
             <Link href="/settings">
               <SidebarLink Icon={IoIosSettings} text={"Settings"} />

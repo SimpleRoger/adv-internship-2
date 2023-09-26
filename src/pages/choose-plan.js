@@ -16,6 +16,7 @@ export default function choosePlan() {
   const router = useRouter();
   const auth = getAuth(app);
   const [selectedOption, setSelectedOption] = useState("option1");
+  const [priceId, setPriceId] = useState("price_1NrZfqG0JjiKJbF2vtYajBhV");
   const [isPremium, setIsPremium] = useState(false);
 
   useEffect(() => {
@@ -23,17 +24,21 @@ export default function choosePlan() {
       const newPremiumStatus = auth.currentUser
         ? await getPremiumStatus(app)
         : false;
-      setIsPremium(newPremiumStatus);
+      setIsPremium(true);
     };
     console.log(isPremium);
   }, [app, auth.currentUser?.id]);
 
   const handleButtonClick = (option) => {
     setSelectedOption(option);
+    if (option == "option1") {
+      setPriceId("price_1NrZfqG0JjiKJbF2vtYajBhV");
+    } else {
+      setPriceId("price_1NuTWVG0JjiKJbF2X7DRLqrF");
+    }
   };
 
   const checkOut = async () => {
-    const priceId = "price_1NrZfqG0JjiKJbF2vtYajBhV";
     const checkOutUrl = await getCheckoutUrl(app, priceId);
     router.push(checkOutUrl);
   };
@@ -102,7 +107,12 @@ export default function choosePlan() {
               <p>No trial included</p>
             </div>
           </div>
-          <button onClick={checkOut}>Start your first month</button>
+          <button
+            className="font-extrabold text-[20px] p-10 border-2 border-blue-500 pd- 5"
+            onClick={checkOut}
+          >
+            Start your first month
+          </button>
         </div>
       </div>
     </div>
