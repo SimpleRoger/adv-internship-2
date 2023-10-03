@@ -24,7 +24,7 @@ const AudioPlayer = ({ bookData }) => {
 
   return (
     <div className="">
-      <div className="flex items-center justify-evenly fixed bottom-0 mt-auto bg-[#042330] w-[100%] left-0 text-white">
+      <div className="flex md:flex-row flex-col items-center justify-evenly fixed bottom-0 mt-auto bg-[#042330] w-[100%] left-0 text-white">
         {/* {audio.audio} */}
         <DisplayTrack
           song={bookData}

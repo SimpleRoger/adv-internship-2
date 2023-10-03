@@ -1,6 +1,6 @@
 input[type="range"] {
     --range-progress: 0%;
-    width: 400px;
+    width: 60%;
     /* ... */
   }
   

@@ -17,9 +17,9 @@ const inter = Inter({ subsets: ["latin"] });
 export default function Home() {
   const user = useSelector((state) => state.user);
   const router = useRouter();
-  if (user.email != null) {
-    router.push("/for-you");
-  }
+  // if (user.email != null) {
+  //   router.push("/for-you");
+  // }
   return (
     <>
       <SignUpModal />

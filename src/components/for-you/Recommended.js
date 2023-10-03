@@ -3,13 +3,28 @@ import React, { useEffect, useRef, useState } from "react";
 import { AiOutlineStar } from "react-icons/ai";
 import { BsClock } from "react-icons/bs";
 import { Skelly } from "../Skelly";
+import { app, auth } from "../../../firebase";
+import { getPremiumStatus } from "../choose-plan/getPremiumStatus";
 export default function Recommended() {
   const [booksData, setBooksData] = useState([]);
   const [loading, setLoading] = useState(true);
   // audio
   const durationsRef = useRef({});
   const [durations, setDurations] = useState({});
+  const [isPremium, setIsPremium] = useState(false);
 
+  useEffect(() => {
+    const checkPremium = async () => {
+      const newPremiumStatus = auth.currentUser
+        ? await getPremiumStatus(app)
+        : false;
+      setIsPremium(newPremiumStatus);
+      console.log(newPremiumStatus);
+      // console.log(await getPremiumStatus(app));
+    };
+    checkPremium();
+    // console.log(isPremium);
+  }, [auth.currentUser]);
   useEffect(() => {
     async function fetchData() {
       const response = await fetch(
@@ -68,7 +83,9 @@ export default function Recommended() {
           <>
             {booksData.map((book) => (
               <Link
-                className="w-[200px]"
+                className="w-[230px] mx-4       
+               hover:bg-gray-100
+                transition duration-300 ease-in-out"
                 href={"/book/" + book.id}
                 key={book.id}
                 bookData={book}
@@ -90,7 +107,7 @@ export default function Recommended() {
                     <AiOutlineStar />
                     {book.averageRating}
                   </div>
-                  {book.subscriptionRequired && (
+                  {book.subscriptionRequired && isPremium == false && (
                     <div className="absolute right-4 top-[0px] text-[12px] text-white bg-red-500 px-2 py-[1px] rounded-md">
                       Premium
                     </div>

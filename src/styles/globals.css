@@ -547,14 +547,13 @@ button:disabled {
 }
 
 .selected {
-  background-color: black; 
-  /* padding: 10px; */
-  /* width: 10px;
-  height: 10px;
-  content: "";
-  margin: 5px;
-  border-radius: 10px; */
-  /* border: #032b41 2px;  */
-  /* position: absolute; */
-  /* position: absolute; */
+  width: 4px; /* Set the width and height of the inner dot */
+  height: 4px;
+  background-color: black; /* Set the background color of the inner dot */
+  border-radius: 50%; /* Make it a perfect circle */
+  position: absolute; /* Position it absolutely within the outer circle */
+  top: 50%; /* Move it vertically to the center */
+  left: 50%; /* Move it horizontally to the center */
+  transform: translate(-50%, -50%); /* Center it precisely */
+  border: 4px solid #2be080;
 }

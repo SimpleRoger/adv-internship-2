@@ -57,7 +57,7 @@ const Controls = ({ audioRef, progressBarRef, setTimeProgress, duration }) => {
 
   return (
     <div className="controls-wrapper">
-      <div className="controls flex gap-5">
+      <div className="controls flex gap-5 mx-10">
         <button onClick={skipBackward}>
           <TbRewindBackward15 size={28} />
         </button>

@@ -1,5 +1,5 @@
 import { AiFillHighlight, AiOutlineSearch } from "react-icons/ai";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { debounce } from "lodash"; // npmYou'll need the lodash library for debounce
 import classNames from "classnames";
 import Link from "next/link";
@@ -24,11 +24,15 @@ import { signOut } from "firebase/auth";
 import { auth } from "../../../firebase";
 import { signOutUser } from "@/redux/userSlice";
 import { closeLogInModal, closeSignUpModal } from "@/redux/modalSlice";
+import { BsClock } from "react-icons/bs";
 
 export default function SearchBar() {
   const email = useSelector((state) => state.user.email);
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
+
+  const durationsRef = useRef({});
+  const [durations, setDurations] = useState({});
   async function handleSignOut() {
     await signOut(auth);
     dispatch(signOutUser());
@@ -47,6 +51,17 @@ export default function SearchBar() {
       setSearchResults(data.slice(0, 3));
       setLoading(false);
       console.log(searchResults);
+      const durationsObj = {};
+      data.forEach((book) => {
+        if (book.audioLink) {
+          const audioElement = new Audio(book.audioLink);
+          durationsRef.current[book.id] = audioElement;
+          audioElement.addEventListener("loadedmetadata", () => {
+            durationsObj[book.id] = audioElement.duration;
+            setDurations({ ...durationsObj });
+          });
+        }
+      });
     } catch (error) {
       console.error("Error performing search:", error);
     }
@@ -68,7 +83,16 @@ export default function SearchBar() {
     setSearchTerm(text);
     debouncedSearch(text); // Call the debounced search function
   };
-
+  const formatTime = (time) => {
+    if (time && !isNaN(time)) {
+      const minutes = Math.floor(time / 60);
+      const formatMinutes = minutes < 10 ? `0${minutes}` : `${minutes}`;
+      const seconds = Math.floor(time % 60);
+      const formatSeconds = seconds < 10 ? `0${seconds}` : `${seconds}`;
+      return `${formatMinutes}:${formatSeconds}`;
+    }
+    return "00:00";
+  };
   useEffect(() => {
     console.log(modalOpen);
   }, [modalOpen]);
@@ -142,12 +166,18 @@ export default function SearchBar() {
                           <div className={elementClasses}>
                             <img
                               src={book.imageLink}
-                              className="w-[100px] "
+                              className="w-[100px] h-[110px] mr-2"
                             ></img>
-                            <div className="text-[15px]">
-                              <h4>{book.title}</h4>
-                              <h4 className="font-thin">{book.author}</h4>
-                              {/* <h4>{book.author}</h4> */}
+                            <div className="flex flex-col gap-2">
+                              <div className="text-[15px]">
+                                <h4>{book.title}</h4>
+                                <h4 className="font-thin">{book.author}</h4>
+                                {/* <h4>{book.author}</h4> */}
+                              </div>
+                              <div className="flex gap-2">
+                                <BsClock />
+                                {formatTime(durations[book.id]) || "0:00"}
+                              </div>
                             </div>
                           </div>
                         </Link>
