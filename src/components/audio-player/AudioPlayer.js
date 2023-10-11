@@ -23,7 +23,7 @@ const AudioPlayer = ({ bookData }) => {
   //   ];
 
   return (
-    <div className="">
+    <div className="mt-5">
       <div className="flex md:flex-row flex-col items-center justify-evenly fixed bottom-0 mt-auto bg-[#042330] w-[100%] left-0 text-white">
         {/* {audio.audio} */}
         <DisplayTrack

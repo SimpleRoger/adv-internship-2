@@ -70,7 +70,7 @@ export default function SearchBar() {
   const [searchResults, setSearchResults] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const commonStyles =
-    "h-full relative flex flex-col space-between gap-y-[60%] justify-start text-left z-10";
+    "h-full relative flex flex-col justify-between text-left z-10 mt-5";
   const specialStyles = "pb-[50px] z-10";
   const styling = `${commonStyles} ${specialStyles}`;
   const debouncedSearch = debounce((text) => {
@@ -166,7 +166,7 @@ export default function SearchBar() {
                           <div className={elementClasses}>
                             <img
                               src={book.imageLink}
-                              className="w-[100px] h-[110px] mr-2"
+                              className="w-[100px] h-[110px] mr-2 "
                             ></img>
                             <div className="flex flex-col gap-2">
                               <div className="text-[15px]">
@@ -209,8 +209,8 @@ export default function SearchBar() {
                 class=" bg-white fixed top-0 left-0 w-64 h-full shadow-lg z-20"
               >
                 <nav className={styling}>
-                  <div>
-                    <div className="flex justify-start py-3 px-3">
+                  <div className="space-y-[20px]">
+                    <div className="flex justify-start py-3 px-3 mb-5 ">
                       <Image
                         src={"/assets/logo.webp"}
                         width={200}
@@ -224,7 +224,7 @@ export default function SearchBar() {
                     <SidebarLink Icon={AiFillHighlight} text={"Highlights"} />
                     <SidebarLink Icon={AiOutlineSearch} text={"Search"} />
                   </div>
-                  <div>
+                  <div className="space-y-[20px]">
                     {/* settings page */}
                     <Link href="/settings">
                       <SidebarLink Icon={IoIosSettings} text={"Settings"} />
@@ -260,7 +260,8 @@ export default function SearchBar() {
     return (
       <li
         onClick={click}
-        className="hoverAnimation flex ml-3 mb-3 items-center text-xl space-x-3 cursor-pointer text-left text-black
+        className="hoverAnimation flex  mb-3 items-center text-xl space-x-3 cursor-pointer text-left p-5 text-black hover:bg-gray-100
+        transition duration-300 ease-in-out
       "
       >
         <Icon className="h-7" />

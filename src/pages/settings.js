@@ -34,8 +34,8 @@ export default function settings() {
     <>
       <Sidebar />
       <Searchbar />
-      <div className="w-full flex flex-col md:ml-[200px] space-y-5">
-        <div className="mx-auto md:w-[70%] max-w-[700px] min-w-[400px]">
+      <div className="w-full flex flex-col md:ml-[200px] space-y-5 mt-10">
+        <div className="mx-auto md:w-[70%] max-w-[1200px] min-w-[400px]">
           <h1 className="text-[30px] font-extrabold border-b border-gray-200">
             Settings
           </h1>

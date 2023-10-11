@@ -120,12 +120,12 @@ export default function Book({ id }) {
   }
 
   return (
-    <div className="flex flex-col width-[100%] md:ml-[300px]">
+    <div className="flex flex-col width-full md:ml-[260px] mx-8">
       <SearchBar />
       <Sidebar />
-      {/* <AuthModal />  */}
-      <div className="max-w-[1070px] w-[100%] mx-auto p-2">
-        <div className="width-[100%]">
+      {/* main content */}
+      <div className=" max-w-[1070px] w-full mx-auto p-2 mt-10">
+        <div className=" w-full">
           {loading ? (
             <div className="flex gap-7">
               <div className="flex flex-col gap-[16px]">
@@ -148,15 +148,12 @@ export default function Book({ id }) {
               <Skelly width={200} height={400} />
             </div>
           ) : (
-            <div className="flex-col md:flex-row gap-[16px]">
-              <div className="flex items-center mx-auto">
-                <img
-                  src={bookData?.imageLink}
-                  className="w-[300px] min-w-[300px] mx-auto"
-                />
+            <div className="flex flex-col lg:flex-row-reverse gap-[16px]">
+              <div className="flex max-w-[300px] min-w-[300px] max-h-[300px] justify-center">
+                <img src={bookData?.imageLink} />
               </div>
               {/* main */}
-              <div className="flex flex-col w-[100%] min-w-[500px]">
+              <div className="flex flex-col w-[100%] max-w-[700px]">
                 <h1 className="text-4xl">{bookData?.title}</h1>
                 <h1 className="text-2xl">{bookData?.author}</h1>
                 <h3 className="text-xl font-thin">{bookData?.subTitle}</h3>

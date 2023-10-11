@@ -24,7 +24,7 @@ const DisplayTrack = ({ song, audioRef, setDuration, progressBarRef }) => {
         <div className="audio-info flex items-center my-2">
           <div className="audio-image">
             {song?.imageLink ? (
-              <img src={song?.imageLink} className="w-[80px]" alt="audio avatar" />
+              <img src={song?.imageLink} className="w-[80px] min-w-[60px]" alt="audio avatar" />
             ) : (
               <div className="icon-wrapper">
                 <span className="audio-icon">
@@ -34,7 +34,7 @@ const DisplayTrack = ({ song, audioRef, setDuration, progressBarRef }) => {
             )}
           </div>
           <div className="text">
-            <p className="title">{song?.title}</p>
+            <p className="title text-sm">{song?.title}</p>
             <p>{song?.author}</p>
           </div>
         </div>

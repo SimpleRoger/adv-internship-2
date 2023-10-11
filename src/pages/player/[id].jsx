@@ -29,7 +29,7 @@ export default function Player({ id }) {
     <>
       <Sidebar audioPage={true} />
       <SearchBar />
-      <div className=" pb-[100px] md:ml-[255px]">
+      <div className=" mt-5 pb-[100px] md:ml-[255px] mx-10 mb-[100px]">
         <div className="flex flex-col max-w-2xl  mx-auto">
           <h1 className="text-4xl margin-[#e1e7ea] mb-[32px] pb-[16px] border-b-2">
             {bookData?.title}
